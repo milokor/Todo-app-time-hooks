@@ -39,14 +39,20 @@ export const App: React.FC = () => {
     minutes: number,
     seconds: number,
   ): void => {
+    let min = minutes;
+    let sec = seconds;
+    if (seconds > 59) {
+      min += Math.floor(seconds / 60);
+      sec = seconds % 60;
+    }
     const id = Math.floor(Math.random() * 9999);
     const newTask = {
       name: label,
       id,
       completed: false,
       change: false,
-      min: minutes,
-      sec: seconds,
+      min: min,
+      sec: sec,
       timer: false,
       flagInterval: false,
     };
