@@ -29,12 +29,17 @@ export const NewTaskForm: React.FC<NewTaskFormProps> = ({ addTaskInput }) => {
     setMinutes('');
     setSeconds('');
   };
-
+  const inputError = (time: string) => {
+    if (time.trim() === '') return;
+    if (isNaN(parseInt(time.trim()))) {
+      return 'error';
+    }
+  };
   return (
     <form className="new-todo-form" onSubmit={(e) => onSubmit(e)}>
       <input
         name="label"
-        className="new-todo"
+        className={`new-todo ${label.trim() ? ' ' : 'error'} `}
         placeholder="Task"
         value={label}
         onChange={(e) => setLabel(e.target.value)}
@@ -42,7 +47,7 @@ export const NewTaskForm: React.FC<NewTaskFormProps> = ({ addTaskInput }) => {
       />
       <input
         name="minutes"
-        className="new-todo-form__timer"
+        className={`new-todo-form__timer ${inputError(minutes)}`}
         value={minutes}
         onChange={(e) => setMinutes(e.target.value)}
         placeholder="Min"
@@ -50,7 +55,7 @@ export const NewTaskForm: React.FC<NewTaskFormProps> = ({ addTaskInput }) => {
       />
       <input
         name="seconds"
-        className="new-todo-form__timer"
+        className={`new-todo-form__timer ${inputError(seconds)}`}
         value={seconds}
         onChange={(e) => setSeconds(e.target.value)}
         placeholder="Sec"

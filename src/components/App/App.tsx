@@ -160,6 +160,7 @@ export const App: React.FC = () => {
       setIntervalActive(intervalId);
     }
   };
+
   useEffect(() => {
     return () => {
       if (intervalActive) {
